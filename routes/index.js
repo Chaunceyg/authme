@@ -22,7 +22,7 @@ router.get('/', function(request, response, next) {
 
    knex('tweets').select().then(function(tweets){
     tweets.reverse();
-    response.render('index', { title: 'Authorize Me!', username: username, 'tweets': tweets});
+    response.render('index', { title: 'Welcome to Dandelion!', username: username, 'tweets': tweets});
    })
   /*
   render the index page. The username variable will be either null
@@ -89,7 +89,7 @@ router.post('/register', function(request, response) {
     */console.log(database('users'));
     database('users').insert({
       username: username,
-      password: password,
+      password: password
     }).then(function(results) {
       /*
       Here we set a "username" cookie on the response. This is the cookie
@@ -101,7 +101,6 @@ router.post('/register', function(request, response) {
       */
       // var user_id = results[0].id;
       response.cookie('username', username)
-      // response.cookie('user_id', user_id)
       response.redirect('/');
     
     });

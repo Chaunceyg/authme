@@ -21,29 +21,31 @@ block content
         div(class="tweets")=tweet.tweets
         div= tweet.username
   else
-    p(class="regist_title") You are not logged in. Would you like to be?
-    div
-      form(method="post" action="/register" class="regist")
-        h2 Register a new account
-        div
-          label Username:
-            input(type="text" name="username" placeholder="username")
-        div
-          label Password:
-            input(type="password" name="password")
-        div
-          label Confirm Password:
-            input(type="password" name="password_confirm")
-        div
-          input(type="submit" value="Pleased to meet you!")
-    div
-      form(method="post" action="/login" class="login")
-        h2 Log into an existing account
-        div
-          label Username:
-            input(type="text" name="username" placeholder="username")
-        div
-          label Password:
-            input(type="password" name="password")
-        div
-          input(type="submit" value="Let me in!")
+    div(class="backgrnd")
+      p(class="regist_title") You are not logged in. Would you like to be?
+      div
+        form(method="post" action="/register" class="regist")
+          h2 Register a new account
+          div
+            label Username:
+              input(type="text" name="username" placeholder="username")
+          div
+            label Password:
+              input(type="password" name="password")
+          div
+            label Confirm Password:
+              input(type="password" name="password_confirm")
+          div(class="buttons")
+            input(type="submit" value="Welcome!")
+      div
+        form(method="post" action="/login" class="login")
+          h2 Log into an existing account
+          div
+            label Username:
+              input(type="text" name="username" placeholder="username")
+          div
+            label Password:
+              input(type="password" name="password")
+          div(class="buttons")
+            input(type="submit" value="Log in!")
+    img(class="dandimg" src="/dandelion.jpg")
