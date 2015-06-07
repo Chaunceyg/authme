@@ -7,22 +7,29 @@ This is a request handler for loading the main page. It will check to see if
 a user is logged in, and render the index page either way.
 */
 router.get('/', function(request, response, next) {
-  var username;
+    
   /*
   Check to see if a user is logged in. If they have a cookie called
   "username," assume it contains their username
   */
-  if (request.cookies.username) {
-    username = request.cookies.username;
-  } else {
-    username = null;
-  }
+    if (request.cookies.username) {
+      username = request.cookies.username;
+    } else {
+      username = null;
+    }
+
+   var knex = app.get('database');
+
+   knex('tweets').select().then(function(tweets){
+    tweets.reverse();
+    response.render('index', { title: 'Authorize Me!', username: username, 'tweets': tweets});
+   })
   /*
   render the index page. The username variable will be either null
   or a string indicating the username.
   */
-  response.render('index', { title: 'Authorize Me!', username: username });
-});
+    
+  });
 
 /*
 This is the request handler for receiving a registration request. It will
@@ -36,7 +43,10 @@ It has some bugs:
 * If someone enters an empty username and/or password, it'll accept them
   without complaint.
 */
+
 router.post('/register', function(request, response) {
+ 
+  // res.clearCookie('username');
   /*
   request.body is an object containing the data submitted from the form.
   Since we're in a POST handler, we use request.body. A GET handler would use
@@ -54,20 +64,33 @@ router.post('/register', function(request, response) {
       password_confirm = request.body.password_confirm,
       database = app.get('database');
 
-  if (password === password_confirm) {
+       database('users').where({'username': username}).then(function(res){
+        if(res.length > 0){
+          response.render('index', {
+            title: "Authorize Me!",
+            user: null,
+            error: "Username is already in use, please try something else."
+          });
+
+          return;
+          };
+      // else there is not yet a user
+
+          if (password === password_confirm) {
+
     /*
     This will insert a new record into the users table. The insert
     function takes an object whose keys are column names and whose values
-    are the contents of the record.
+    are the contents of the record.*/
 
-    This uses a "promise" interface. It's similar to the callbacks we've
+    /*This uses a "promise" interface. It's similar to the callbacks we've
     worked with before. insert({}).then(function() {...}) is very similar
     to insert({}, function() {...});
-    */
+    */console.log(database('users'));
     database('users').insert({
       username: username,
       password: password,
-    }).then(function() {
+    }).then(function(results) {
       /*
       Here we set a "username" cookie on the response. This is the cookie
       that the GET handler above will look at to determine if the user is
@@ -76,9 +99,13 @@ router.post('/register', function(request, response) {
       Then we redirect the user to the root path, which will cause their
       browser to send another request that hits that GET handler.
       */
+      // var user_id = results[0].id;
       response.cookie('username', username)
+      // response.cookie('user_id', user_id)
       response.redirect('/');
+    
     });
+
   } else {
     /*
     The user mistyped either their password or the confirmation, or both.
@@ -89,8 +116,9 @@ router.post('/register', function(request, response) {
       title: 'Authorize Me!',
       user: null,
       error: "Password didn't match confirmation"
-    });
-  }
+      });
+    }
+  });
 });
 
 /*
@@ -156,5 +184,17 @@ router.post('/login', function(request, response) {
     }
   });
 });
+router.post('/tweet', function(request, response) {
+  var tweets = request.body.twit,
+      database = app.get('database'),
+      username = request.cookies.username;
 
+console.log(username);
+  database('tweets').insert({
+      tweets: tweets,
+      username: username
+    }).then(function() {
+     response.redirect('/')
+    });
+});
 module.exports = router;

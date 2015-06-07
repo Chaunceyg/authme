@@ -6,3 +6,22 @@ body {
 a {
   color: #00B7FF;
 }
+
+.title {
+	text-align: center;
+}
+.regist {
+	padding: 20px;
+	color: blue;
+	text-align: center;
+}
+
+.regist_title {
+	color: blue;
+	text-align: center;
+}
+
+.login {
+	text-align: center;
+	color: blue;
+}
