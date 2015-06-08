@@ -6,6 +6,8 @@ block content
     h3= error
   if username
     p You are currently logged in as #{ username }
+    span
+      a(href="/logout") Log out
     div
       form(method="post" action="/tweet")
         h2 Tell us what you're thinking!

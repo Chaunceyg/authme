@@ -46,7 +46,7 @@ It has some bugs:
 
 router.post('/register', function(request, response) {
  
-  // res.clearCookie('username');
+  
   /*
   request.body is an object containing the data submitted from the form.
   Since we're in a POST handler, we use request.body. A GET handler would use
@@ -188,7 +188,6 @@ router.post('/tweet', function(request, response) {
       database = app.get('database'),
       username = request.cookies.username;
 
-console.log(username);
   database('tweets').insert({
       tweets: tweets,
       username: username
@@ -196,4 +195,9 @@ console.log(username);
      response.redirect('/')
     });
 });
+router.get('/logout', function(request, response) {
+  console.log("we made it")
+  response.clearCookie('username');
+  response.redirect('/');
+})
 module.exports = router;
