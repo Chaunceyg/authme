@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var app = require('../app')
-var redis = require('redis'),
-    client = redis.createClient();
+var app = require('../app');
+var redis = require('redis');
+var client = redis.createClient();
 var uuid = require('node-uuid');
 var nonce = uuid.v4();
 var nodemailer = require('nodemailer');
@@ -40,12 +40,12 @@ router.post('/register', function(request, response) {
       });
     return;
     };
-  var dataInfo = {
-    email: email,
-    username: username,
-    password: password
-  }; 
-  client.set(nonce, JSON.stringify(dataInfo));
+    var dataInfo = {
+      email: email,
+      username: username,
+      password: password
+    }; 
+    client.set(nonce, JSON.stringify(dataInfo));
     if (password === password_confirm) {  
       transporter.sendMail({
         from: 'Dandy@Dandelion.com',
@@ -54,10 +54,10 @@ router.post('/register', function(request, response) {
         text: 'You are now a new user. Click the link below...\n' + 
           'http://localhost:3000/verify_email/' +  nonce + '\nClick Here to Verify!'
       });
-    response.render('emailver', {
-      title: 'Thank you!',
-      user: null
-    })
+      response.render('emailver', {
+        title: 'Thank you!',
+        user: null
+      });
     } else {
       response.render('index', {
         title: 'Welcome to Dandelion!',

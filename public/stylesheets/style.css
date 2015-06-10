@@ -40,10 +40,18 @@ a {
 
 }
 .logout {
-  color: #696267;
   text-align: center;
 }
 
+.logout a {
+  color: #696267;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.logout a:hover {
+  border-bottom: 1px solid #696267;
+}
 .tweets {
   text-align: center;
   font-size: 25px;
@@ -54,10 +62,52 @@ a {
 .tweetinput {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 18px;
-  padding: 50px;
-
+  padding: 30px;
 }
 
+.tweeted {
+  text-align: center;
+}
+
+.tweeted h2 {
+  font-family: 'Lobster', cursive;
+  color: white;
+  font-size: 50px;
+}
+
+.tweet {
+  background-color: white;
+  opacity: .7;
+  border-radius: 25px;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 70%;
+  text-align: left;
+  padding-left: 60px;
+  position: relative;
+  font-size: 16px;
+}
+
+.tweet::before{
+  content: url('../dandelion.png');
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+}
+.usrname {
+  font-size: 12px;
+  color: #696267;
+  margin-top: 6px;
+}
+
+.usrname::before {
+  content:"-";
+}
 .regist_title{
 	font-size: 15px;
 }
@@ -78,6 +128,13 @@ a {
 	color: #068f0f;
 }
 
+.tweetbox {
+  padding: 15px;
+  border-radius: 10px;
+  width: 50%;
+  text-align: center;
+  font-size: 16px;
+}
 label {
 	font-size: 18px;
 }
@@ -121,7 +178,7 @@ input[type="submit"]:active {
    border-top-color: #96a145;
    background: #96a145;
    }
-}
+
 
 
 

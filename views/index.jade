@@ -6,22 +6,21 @@ block content
     h3= error
   if username
     p(class="curlogin") You are currently logged in as #{ username }
-    span
-      a(href="/logout" class="logout") Log out
+    div(class="logout")
+      a(href="/logout") Log out
     div
       form(method="post" action="/tweet" class="tweets")
         h2 Tell us what you're thinking!
         div(class="tweetinput")
-          label I am thinking...
-            input(type="text" name="twit" placeholder="twit")
+          input(type="text" name="twit" placeholder="I am thinking..." class="tweetbox")
         div
             input(type="submit" value="Say it!")
-    div
+    div(class="tweeted")
       form(method="post" action="/tweet")
-      h2 Latest Twits!
+      h2 Latest Tufts!
       each tweet in tweets
         div(class="tweet")=tweet.tweets
-        div= tweet.username
+          div(class="usrname")= tweet.username
   else
     div(class="backgrnd")
       p(class="regist_title") You are not logged in. Would you like to be?
