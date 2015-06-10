@@ -33,6 +33,31 @@ a {
 	font-family: 'Lobster', cursive;
 }
 
+.curlogin {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+
+}
+.logout {
+  color: #696267;
+  text-align: center;
+}
+
+.tweets {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-family: 'Lobster', cursive;
+}
+
+.tweetinput {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  padding: 50px;
+
+}
+
 .regist_title{
 	font-size: 15px;
 }
@@ -97,3 +122,6 @@ input[type="submit"]:active {
    background: #96a145;
    }
 }
+
+
+
