@@ -1,2 +1,2 @@
 # authme
-A site you can log into and out of
+My own twitter clone. Learning the basics of logging in, registration and e-mail verification. 
